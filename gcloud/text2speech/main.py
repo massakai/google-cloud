@@ -5,6 +5,8 @@ Note: ssml must be well-formed according to:
     https://www.w3.org/TR/speech-synthesis/
 """
 from google.cloud import texttospeech
+from pydub import AudioSegment
+from pydub.playback import play
 
 
 def main():
@@ -36,6 +38,10 @@ def main():
         # Write the response to the output file.
         out.write(response.audio_content)
         print('Audio content written to file "output.wav"')
+
+    # 再生する
+    sound = AudioSegment.from_file("output.wav", format="wav")
+    play(sound)
 
 
 if __name__ == "__main__":
